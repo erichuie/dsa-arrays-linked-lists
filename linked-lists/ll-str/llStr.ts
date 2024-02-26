@@ -38,12 +38,12 @@ class LLStr {
   }
 
   /** push(val): add new value to end of list. */
-//
+  //
   push(val: string): void {
     const newNode = new NodeStr(val);
-    if(this.head === null) this.head = newNode;
-    if(this.tail === null) this.tail = newNode;
-    else{
+    if (this.head === null) this.head = newNode;
+    if (this.tail === null) this.tail = newNode;
+    else {
       this.tail.next = newNode;
       this.tail = newNode;
     }
@@ -54,7 +54,7 @@ class LLStr {
 
   unshift(val: string): void {
     const newNode = new NodeStr(val);
-    if(this.tail === null) this.tail = newNode;
+    if (this.tail === null) this.tail = newNode;
     newNode.next = this.head;
     this.head = newNode;
     this.length++;
@@ -66,18 +66,18 @@ class LLStr {
    **/
 
   pop(): string {
-    if(this.head === null) throw new IndexError();
+    if (this.head === null) throw new IndexError();
 
     let currNode = this.head;
 
-    if(currNode.next === null){
+    if (currNode.next === null) {
       this.head = null;
       this.tail = null;
       this.length = 0;
       return currNode.val;
     }
 
-    while(currNode.next!.next){
+    while (currNode.next!.next) {
       currNode = currNode.next!;
     }
     const tempNode = currNode.next;
@@ -100,7 +100,7 @@ class LLStr {
 
     let nodeToReturn = this.head;
 
-    if (this.head.next === null){
+    if (this.head.next === null) {
       this.head = null;
       this.tail = null;
     } else {
@@ -121,7 +121,7 @@ class LLStr {
 
     let currNode = this.head;
 
-    for (let i=0; i< this.length; i++){
+    for (let i = 0; i < this.length; i++) {
       if (i === idx) return currNode.val;
       if (currNode.next === null) throw new IndexError();
       currNode = currNode.next;
@@ -135,12 +135,12 @@ class LLStr {
    **/
 
   setAt(idx: number, val: string): void {
-    if(this.head === null) throw new IndexError();
+    if (this.head === null) throw new IndexError();
 
     let currNode = this.head;
 
-    for(let i = 0; i < this.length; i++){
-      if(i === idx){
+    for (let i = 0; i < this.length; i++) {
+      if (i === idx) {
         currNode.val = val;
         return;
       }
@@ -156,25 +156,57 @@ class LLStr {
    **/
 
   insertAt(idx: number, val: string): void {
+    debugger;
+    console.log('index %o and val %o',idx,val);
+    if (idx < 0 || idx > this.length) throw new IndexError();
+
     const newNode = new NodeStr(val);
-    if(idx > this.length || idx < 0) throw new IndexError();
-    if(this.head === null){
+
+    if (idx === 0) {
+      let temp = this.head;
+      if (this.length === 0) this.tail = newNode;
+
       this.head = newNode;
-      this.tail = newNode;
+      newNode.next = temp;
       this.length++;
       return;
+
     }
 
+
+//     {'newNode' : {'next' : null}}
+
+//     let temp = { 'a': {'next' : 'b'} }
+
+//     [{ 'a': 'b' }, { 'b': 'c' }, { 'c': null }];
+
+// //idx = 1
+//     { 'a': {'next' : 'newNode'} }  //0
+//     {'newNode' : {'next' : 'b'}}
+//     { 'b': {'next' : 'c'} }  //1
+//     { 'c': {'next': null} }  //2
+
+
+//     //temp
+//     { 'b': {'next' : 'c'} }
+
     let currNode = this.head;
-    for(let i = 0; i < this.length; i++){
-      if(i === idx-1){
-        let temp = currNode;
-        currNode = newNode;
+    for (let i = 0; i < this.length; i++) {
+      console.log(`in loop currVal:${currNode!.val} tail:${this.tail!.val}`)
+      if (i === idx - 1) {
+        let temp = currNode!.next;
+        currNode!.next = newNode;
         newNode.next = temp;
+
         this.length++;
+
+        // if(temp!.next === null) {
+        //   this.tail = newNode;
+        // }
+
         return;
       }
-      if (currNode.next !== null) currNode = currNode.next;
+      if (currNode!.next !== null) currNode = currNode!.next;
     }
 
   }
