@@ -126,7 +126,7 @@ class LLStr {
       if (currNode.next === null) throw new IndexError();
       currNode = currNode.next;
     }
-    return currNode.val;
+    throw new IndexError();
   }
 
   /** setAt(idx, val): set val at idx to val.
@@ -135,6 +135,19 @@ class LLStr {
    **/
 
   setAt(idx: number, val: string): void {
+    if(this.head === null) throw new IndexError();
+
+    let currNode = this.head;
+
+    for(let i = 0; i < this.length; i++){
+      if(i === idx){
+        currNode.val = val;
+        return;
+      }
+      if (currNode.next !== null) currNode = currNode.next;
+    }
+
+    throw new IndexError();
   }
 
   /** insertAt(idx, val): add node w/val before idx.
@@ -143,6 +156,27 @@ class LLStr {
    **/
 
   insertAt(idx: number, val: string): void {
+    const newNode = new NodeStr(val);
+    if(idx > this.length || idx < 0) throw new IndexError();
+    if(this.head === null){
+      this.head = newNode;
+      this.tail = newNode;
+      this.length++;
+      return;
+    }
+
+    let currNode = this.head;
+    for(let i = 0; i < this.length; i++){
+      if(i === idx-1){
+        let temp = currNode;
+        currNode = newNode;
+        newNode.next = temp;
+        this.length++;
+        return;
+      }
+      if (currNode.next !== null) currNode = currNode.next;
+    }
+
   }
 
   /** removeAt(idx): return & remove item at idx,
