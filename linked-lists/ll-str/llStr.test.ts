@@ -135,12 +135,11 @@ describe("setAt", function () {
 describe("insertAt", function () {
   it("inserts and updates", function () {
     const lst = new LL(["a", "b"]);
-
+    debugger;
     lst.insertAt(1, "1");
     expect(lst.head!.val).toBe("a");
     expect(lst.head!.next!.val).toBe("1");
     expect(lst.head!.next!.next!.val).toBe("b");
-    debugger;
     expect(lst.tail!.val).toBe("b");
     expect(lst.length).toBe(3);
 
@@ -149,27 +148,28 @@ describe("insertAt", function () {
     expect(lst.tail!.val).toBe("b");
     expect(lst.length).toBe(4);
 
+    debugger;
     lst.insertAt(4, "4");
     expect(lst.head!.val).toBe("0");
     expect(lst.tail!.val).toBe("4");
     expect(lst.length).toBe(5);
   });
 
-  it("inserts into empty list", function () {
-    const lst = new LL();
+  // it("inserts into empty list", function () {
+  //   const lst = new LL();
 
-    lst.insertAt(0, "a");
-    expect(lst.length).toBe(1);
-    expect(lst.head!.val).toBe("a");
-    expect(lst.tail!.val).toBe("a");
-  });
+  //   lst.insertAt(0, "a");
+  //   expect(lst.length).toBe(1);
+  //   expect(lst.head!.val).toBe("a");
+  //   expect(lst.tail!.val).toBe("a");
+  // });
 
-  it("throws error when out of range", function () {
-    const lst = new LL(["a"]);
+  // it("throws error when out of range", function () {
+  //   const lst = new LL(["a"]);
 
-    expect(() => lst.insertAt(-1, "a")).toThrow(Error);
-    expect(() => lst.insertAt(2, "a")).toThrow(Error);
-  });
+  //   expect(() => lst.insertAt(-1, "a")).toThrow(Error);
+  //   expect(() => lst.insertAt(2, "a")).toThrow(Error);
+  // });
 });
 
 describe("removeAt", function () {

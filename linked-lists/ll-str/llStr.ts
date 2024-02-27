@@ -156,7 +156,6 @@ class LLStr {
    **/
 
   insertAt(idx: number, val: string): void {
-    debugger;
     console.log('index %o and val %o',idx,val);
     if (idx < 0 || idx > this.length) throw new IndexError();
 
@@ -192,6 +191,7 @@ class LLStr {
 
     let currNode = this.head;
     for (let i = 0; i < this.length; i++) {
+      debugger;
       console.log(`in loop currVal:${currNode!.val} tail:${this.tail!.val}`)
       if (i === idx - 1) {
         let temp = currNode!.next;
@@ -200,9 +200,9 @@ class LLStr {
 
         this.length++;
 
-        // if(temp!.next === null) {
-        //   this.tail = newNode;
-        // }
+        if((temp!.next === null) && (i === this.length - 1)) {
+          this.tail = newNode;
+        }
 
         return;
       }
