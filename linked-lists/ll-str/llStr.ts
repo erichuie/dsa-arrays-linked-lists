@@ -156,7 +156,7 @@ class LLStr {
    **/
 
   insertAt(idx: number, val: string): void {
-    console.log('index %o and val %o',idx,val);
+    console.log('index %o and val %o', idx, val);
     if (idx < 0 || idx > this.length) throw new IndexError();
 
     const newNode = new NodeStr(val);
@@ -172,38 +172,21 @@ class LLStr {
 
     }
 
-
-//     {'newNode' : {'next' : null}}
-
-//     let temp = { 'a': {'next' : 'b'} }
-
-//     [{ 'a': 'b' }, { 'b': 'c' }, { 'c': null }];
-
-// //idx = 1
-//     { 'a': {'next' : 'newNode'} }  //0
-//     {'newNode' : {'next' : 'b'}}
-//     { 'b': {'next' : 'c'} }  //1
-//     { 'c': {'next': null} }  //2
-
-
-//     //temp
-//     { 'b': {'next' : 'c'} }
-
     let currNode = this.head;
     for (let i = 0; i < this.length; i++) {
       debugger;
-      console.log(`in loop currVal:${currNode!.val} tail:${this.tail!.val}`)
+      console.log(`in loop currVal:${currNode!.val} tail:${this.tail!.val}`);
       if (i === idx - 1) {
         let temp = currNode!.next;
         currNode!.next = newNode;
         newNode.next = temp;
 
-        this.length++;
 
-        if((temp!.next === null) && (i === this.length - 1)) {
+        // if((temp!.next === null) && (i === this.length - 1)) {
+        if ((i === this.length - 1)) {
           this.tail = newNode;
         }
-
+        this.length++;
         return;
       }
       if (currNode!.next !== null) currNode = currNode!.next;
@@ -217,6 +200,34 @@ class LLStr {
    **/
 
   removeAt(idx: number): string {
+    if (idx < 0 || idx > this.length) throw new IndexError();
+    debugger;
+
+    // if idx is 0 and we are at the end of the LL
+    if (idx === 0) {
+      let target = this.head;
+      if (this.length === 1) {
+        this.head = this.tail = null;
+        this.length--;
+        return target!.val;
+      }
+    }
+
+    //TODO: not catching if idx = 0 and NOT the end of the list
+    let currNode = this.head;
+    for (let i = 0; i < this.length; i++) {
+      debugger;
+      if (i === idx - 1) {
+        let target = currNode!.next;
+        if (i === this.length-1){
+          this.tail = currNode;
+        }
+        currNode!.next = target!.next;
+        this.length--;
+        return target!.val;
+      }
+      if (currNode!.next !== null) currNode = currNode!.next;
+    }
     return "x";
   }
 

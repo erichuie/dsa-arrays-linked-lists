@@ -155,21 +155,21 @@ describe("insertAt", function () {
     expect(lst.length).toBe(5);
   });
 
-  // it("inserts into empty list", function () {
-  //   const lst = new LL();
+  it("inserts into empty list", function () {
+    const lst = new LL();
 
-  //   lst.insertAt(0, "a");
-  //   expect(lst.length).toBe(1);
-  //   expect(lst.head!.val).toBe("a");
-  //   expect(lst.tail!.val).toBe("a");
-  // });
+    lst.insertAt(0, "a");
+    expect(lst.length).toBe(1);
+    expect(lst.head!.val).toBe("a");
+    expect(lst.tail!.val).toBe("a");
+  });
 
-  // it("throws error when out of range", function () {
-  //   const lst = new LL(["a"]);
+  it("throws error when out of range", function () {
+    const lst = new LL(["a"]);
 
-  //   expect(() => lst.insertAt(-1, "a")).toThrow(Error);
-  //   expect(() => lst.insertAt(2, "a")).toThrow(Error);
-  // });
+    expect(() => lst.insertAt(-1, "a")).toThrow(Error);
+    expect(() => lst.insertAt(2, "a")).toThrow(Error);
+  });
 });
 
 describe("removeAt", function () {
@@ -177,6 +177,7 @@ describe("removeAt", function () {
     const lst = new LL(["a", "b", "c", "d"]);
 
     expect(lst.length).toBe(4);
+    debugger;
     expect(lst.removeAt(2)).toBe("c");
     expect(lst.length).toBe(3);
 
