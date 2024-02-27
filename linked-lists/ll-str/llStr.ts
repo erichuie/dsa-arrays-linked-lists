@@ -211,6 +211,12 @@ class LLStr {
         this.length--;
         return target!.val;
       }
+      else{
+        this.head = this.head!.next;
+        this.length--;
+        return target!.val;
+      }
+
     }
 
     //TODO: not catching if idx = 0 and NOT the end of the list
