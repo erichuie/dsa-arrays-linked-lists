@@ -77,8 +77,8 @@ class LLStr {
       return currNode.val;
     }
 
-    while (currNode.next!.next) {
-      currNode = currNode.next!;
+    while (currNode.next && currNode.next.next) {
+      currNode = currNode.next;
     }
     const tempNode = currNode.next;
 
@@ -88,6 +88,7 @@ class LLStr {
     this.length--;
 
     return tempNode!.val;
+
   }
 
   /** shift(): return & remove first item.
@@ -118,7 +119,7 @@ class LLStr {
 
   getAt(idx: number): string {
     if (this.head === null) throw new IndexError();
-
+    if (idx < 0 || idx > this.length) throw new IndexError();
     let currNode = this.head;
 
     for (let i = 0; i < this.length; i++) {
@@ -126,7 +127,8 @@ class LLStr {
       if (currNode.next === null) throw new IndexError();
       currNode = currNode.next;
     }
-    throw new IndexError();
+
+    throw new Error("unreachable");
   }
 
   /** setAt(idx, val): set val at idx to val.
@@ -156,7 +158,6 @@ class LLStr {
    **/
 
   insertAt(idx: number, val: string): void {
-    console.log('index %o and val %o', idx, val);
     if (idx < 0 || idx > this.length) throw new IndexError();
 
     const newNode = new NodeStr(val);
@@ -174,15 +175,11 @@ class LLStr {
 
     let currNode = this.head;
     for (let i = 0; i < this.length; i++) {
-      debugger;
-      console.log(`in loop currVal:${currNode!.val} tail:${this.tail!.val}`);
       if (i === idx - 1) {
         let temp = currNode!.next;
         currNode!.next = newNode;
         newNode.next = temp;
 
-
-        // if((temp!.next === null) && (i === this.length - 1)) {
         if ((i === this.length - 1)) {
           this.tail = newNode;
         }
@@ -219,7 +216,6 @@ class LLStr {
 
     }
 
-    //TODO: not catching if idx = 0 and NOT the end of the list
     let currNode = this.head;
     for (let i = 0; i < this.length; i++) {
       debugger;
